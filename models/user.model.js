@@ -20,12 +20,12 @@ const userSchema = mongoose.Schema({
  
 });
 
-userSchema.pre('save', async function (next){
-    if(!this.isModified('password')){
-        next()
-    }
-    const salt = await bcrypt.genSaltSync(10)
-    this.password = await bcrypt.hashSync(this.password,salt)
-})
+// userSchema.pre('save', async function (next){
+//     if(!this.isModified('password')){
+//         next()
+//     }
+//     const salt = await bcrypt.genSaltSync(10)
+//     this.password = await bcrypt.hashSync(this.password,salt)
+// })
 
 module.exports = mongoose.model("User", userSchema);

@@ -27,8 +27,8 @@ exports.userRegister = async (req, res) => {
                 status: false,
             })
         }
-
-        const passwordHash = await bcrypt.hash(user?.password, 10);
+        const salt = await bcrypt.genSaltSync(10)
+        const passwordHash = await bcrypt.hash(user?.password, salt);
         let userObject = {
             username: user.username,
             email: user.email,
@@ -41,32 +41,32 @@ exports.userRegister = async (req, res) => {
         if (savedUser?._id) {
             let token = jwt.sign({ id: savedUser?._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
             return res.json({
-                message: "Register successfully.", 
+                message: "Register successfully.",
                 status: true,
                 data: token
             })
-        } else return res.json({ 
-            message: "User registration failed", 
-            status: false 
+        } else return res.json({
+            message: "User registration failed",
+            status: false
         })
 
     } catch (error) {
-        
+
         console.log(error);
-        
+
         let message = "User registration failed";
         (error?.code === 11000 && error?.keyPattern?.username) ? message = "Username already exists" : null;
         (error?.code === 11000 && error?.keyPattern?.email) ? message = "Email already exists" : null;
-        
-        return res.json({ 
+
+        return res.json({
             status: false,
             message: message,
             error: error.message
-         })
+        })
     }
 }
 
-exports.userLogin = async(req, res) => {
+exports.userLogin = async (req, res) => {
     try {
         const user = req.body;
 
@@ -114,7 +114,7 @@ exports.userLogin = async(req, res) => {
     }
 }
 
-exports.checkUserExist = async(query) => {
+exports.checkUserExist = async (query) => {
     let messages = {
         email: "This email already exists",
         username: "This username is taken"
@@ -123,8 +123,8 @@ exports.checkUserExist = async(query) => {
         let queryType = Object.keys(query)[0];
         let userObject = await User.findOne(query);
         return !userObject
-        ? res.json({ status: true, message: `This ${queryType} is not taken` })
-        : res.json({ status: false, message: messages[queryType] });
+            ? res.json({ status: true, message: `This ${queryType} is not taken` })
+            : res.json({ status: false, message: messages[queryType] });
     } catch (error) {
         return res.status(500).json({ error: error.message })
     }
