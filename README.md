@@ -9,4 +9,4 @@ SERVER_PORT=8081
 SERVER_IP='<IPv4 Address>'
 JWT_SECRET='giftDelivery'
 ```
-3. npm start
+3. Open Terminal, 'node index'
