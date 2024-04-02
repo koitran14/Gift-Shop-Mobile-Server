@@ -9,4 +9,7 @@ SERVER_PORT=8081
 SERVER_IP='<IPv4 Address>'
 JWT_SECRET='giftDelivery'
 ```
-3. Open Terminal, 'node index'
+3. Open Terminal:
+```shell
+node index
+```
