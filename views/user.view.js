@@ -1,5 +1,6 @@
 const { getAll, userLogin, userRegister, checkUserExist } = require("../controllers/user")
 
+//CÁCH TẠO REST API để fetch
 module.exports = function(app) {
     //GET
     app.get('/user', getAll);

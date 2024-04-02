@@ -1,13 +1,19 @@
-const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+//import model that we use
+const User = require('../models/user.model');
+
+
+// **NOTE: các hàm khác có thể sử dụng bình thường, nhưng riêng insert/insertOne/insertMany thì nó sẽ được dùng cho collection,
+// không phải schema nên mn sử dụng create thay vì insertOne() nhe.
+
 exports.getAll = async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find(); // --> cách gọi method của mongoose lên thằng model mình muốn thao tác.
         return res.status(200).json(users); //res should be used to return with json and status
     } catch (error) {
-        return res.status(500).json({ error: error.message })
+        return res.status(500).json({ error: error.message }) // --> trả về ngắn gọn, bằng res và status như thường lệ, bỏ vào trong json để dễ test trên postman
     }
 }
 

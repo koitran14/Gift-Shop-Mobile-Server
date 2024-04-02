@@ -12,6 +12,7 @@ const port = process.env.PORT || 4000;
 
 app.use(cors());
 
+//CÁCH CONNECT
 mongoose.connect(process.env.DATABASE_URL, {
   dbName: process.env.DATABASE_NAME
 }).then(()=> {
@@ -21,6 +22,7 @@ mongoose.connect(process.env.DATABASE_URL, {
 });
 app.use(bodyParser.json());
 
+//Tạo routes ở đây
 require('./views/user.view')(app);
 
 app.listen(port, () => {

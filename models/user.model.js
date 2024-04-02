@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+
+// NOTE: GỌI DIRECT NHƯ NÀY LUÔN. KHÔNG CẦN PHẢI THÊM BIẾN _id vì căn bản khi create Data nó đã auto tạo rồi.
+// nên về schema không cần
+
 const userSchema = mongoose.Schema({
     username: {
         type: String,
