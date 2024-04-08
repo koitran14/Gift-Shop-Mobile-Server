@@ -28,6 +28,11 @@ require('./views/user.view')(app);
 require('./views/property.view')(app);
 require('./views/store.view')(app);
 require('./views/voucher.view')(app);
+require('./views/product.view')(app);
+require('./views/payment.view')(app);
+require('./views/order.view')(app);
+require('./views/feedback.view')(app);
+require('./views/category.view')(app);
 
 app.listen(port, () => {
     console.log(`Server is running at site: http://localhost:${port}`);
