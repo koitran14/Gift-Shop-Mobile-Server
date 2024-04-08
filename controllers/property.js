@@ -1,0 +1,1 @@
+const Property = require('../models/product.model')

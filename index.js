@@ -23,7 +23,11 @@ mongoose.connect(process.env.DATABASE_URL, {
 app.use(bodyParser.json());
 
 //Tạo routes ở đây
+require('./views/specialDay.view')(app);
 require('./views/user.view')(app);
+require('./views/property.view')(app);
+require('./views/store.view')(app);
+require('./views/voucher.view')(app);
 
 app.listen(port, () => {
     console.log(`Server is running at site: http://localhost:${port}`);
