@@ -13,3 +13,8 @@ JWT_SECRET='giftDelivery'
 ```shell
 node index
 ```
+NOTE: For first time using
+```
+npm i mongoose jsonwebtoken express dotenv bcrypt
+npm update
+```
