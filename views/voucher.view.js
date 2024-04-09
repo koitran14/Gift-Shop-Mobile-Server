@@ -1,5 +1,5 @@
-const {} = require('../controllers/voucher')
+const {getAll} = require('../controllers/voucher')
 
 module.exports = function(app) {
-    
+    app.get('/voucher', getAll);
 }
