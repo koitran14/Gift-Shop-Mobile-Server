@@ -9,12 +9,11 @@ SERVER_PORT=8081
 SERVER_IP='<IPv4 Address>'
 JWT_SECRET='giftDelivery'
 ```
-3. Open Terminal:
-```shell
-node index
-```
 NOTE: For first time using
 ```
 npm i mongoose jsonwebtoken express dotenv bcrypt
 npm update
 ```
+3. Open Terminal:
+```shell
+node index
