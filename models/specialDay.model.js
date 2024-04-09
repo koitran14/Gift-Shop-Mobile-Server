@@ -1,5 +1,4 @@
 const mongoose = require('mongoose'); // Erase if already required
-const propertySchema = require('../models/property.model').schema;
 
 var SpecialDaySchema = new mongoose.Schema({
     date: {
@@ -12,8 +11,7 @@ var SpecialDaySchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    properties:[propertySchema],//many to many
 });
 
-//Export the model
-module.exports = mongoose.model('SpecialDay', SpecialDaySchema);
+const SpecialDay = mongoose.model('SpecialDay', SpecialDaySchema);
+module.exports = SpecialDay;

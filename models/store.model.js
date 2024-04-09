@@ -1,6 +1,5 @@
 const mongoose = require('mongoose'); // Erase if already required
 const productSchema = require('../models/product.model').schema;
-const userSchema = require('../models/user.model').schema;
 
 var storeSchema = new mongoose.Schema({
     storeName:{
@@ -13,9 +12,7 @@ var storeSchema = new mongoose.Schema({
         required:true,
     },
     products:[productSchema],//one to many
-    users:[userSchema],//many to many
 });
 
-//Export the model
-module.exports = mongoose.model('Store', storeSchema);
-
+const Store = mongoose.model('Store', storeSchema);
+module.exports = Store;

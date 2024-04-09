@@ -13,4 +13,5 @@ const propertySchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Property', propertySchema);
+const Property = mongoose.model('Property', propertySchema)
+module.exports = Property;

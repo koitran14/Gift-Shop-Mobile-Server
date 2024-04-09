@@ -11,4 +11,5 @@ const feedBackSchema = new mongoose.Schema({
     }
 }) 
 
-module.exports = mongoose.model('Feedback', feedBackSchema);
+const Feedback = mongoose.model('Feedback', feedBackSchema);
+module.exports = Feedback;
