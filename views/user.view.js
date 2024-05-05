@@ -10,5 +10,5 @@ module.exports = function(app) {
 
     //REGISTER
     app.post('/api/register', userRegister);
-    app.get('/user/user-exist', checkUserExist);
+    app.get('/user-exist', checkUserExist);
 }

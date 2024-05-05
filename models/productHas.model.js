@@ -7,5 +7,4 @@ const productHasSchema = new mongoose.Schema({
     properties:[propertySchema],//many to many
 });
 
-const ProductHas = mongoose.model("ProductHas", productHasSchema);
-module.exports = ProductHas;
+module.exports = mongoose.model("ProductHas", productHasSchema);

@@ -8,5 +8,4 @@ const orderSchema = new mongoose.Schema({
     payment:{paymentSchema}, //one to one
 })
 
-const Order = mongoose.model('Order', orderSchema);
-module.exports = Order;
+module.exports = mongoose.model('Order', orderSchema);

@@ -27,7 +27,7 @@ exports.userRegister = async (req, res) => {
                 status: false,
             })
         }
-        const salt = await bcrypt.genSaltSync(10)
+        const salt = bcrypt.genSaltSync(10)
         const passwordHash = await bcrypt.hash(user?.password, salt);
         let userObject = {
             username: user.username,
@@ -114,7 +114,8 @@ exports.userLogin = async (req, res) => {
     }
 }
 
-exports.checkUserExist = async (query) => {
+exports.checkUserExist = async (req, res) => {
+    let query = req.query;
     let messages = {
         email: "This email already exists",
         username: "This username is taken"

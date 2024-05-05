@@ -7,5 +7,4 @@ const includeSchema = new mongoose.Schema({
     properties:[propertySchema],//many to many
 });
 
- const Include = mongoose.model("Include", includeSchema);
- module.exports = Include;
+module.exports = mongoose.model("Include", includeSchema);

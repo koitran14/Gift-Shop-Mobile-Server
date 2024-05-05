@@ -14,5 +14,4 @@ var storeSchema = new mongoose.Schema({
     products:[productSchema],//one to many
 });
 
-const Store = mongoose.model('Store', storeSchema);
-module.exports = Store;
+module.exports = mongoose.model('Store', storeSchema);

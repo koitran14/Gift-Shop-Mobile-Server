@@ -7,5 +7,4 @@ const selectSchema = new mongoose.Schema({
     products:[productSchema],//many to many
 });
 
-const Select = mongoose.model("Select", selectSchema);
-module.exports = Select;
+module.exports = mongoose.model("Select", selectSchema);

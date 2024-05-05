@@ -3,10 +3,9 @@ const userSchema = require('../models/user.model').schema;
 const storeSchema = require('../models/store.model').schema;
 
 const followingSchema = new mongoose.Schema({
-    users:[userSchema],//many to many
-    stores:[storeSchema],//many to many
+    users: [userSchema], //many to many
+    stores: [storeSchema], //many to many
 });
 
 
- const Following = mongoose.model("Following", followingSchema);
- module.exports = Following;
+module.exports = mongoose.model("Following", followingSchema);

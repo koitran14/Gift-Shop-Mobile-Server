@@ -17,6 +17,5 @@ const productSchema = new mongoose.Schema({
     feedBacks:[feedBackSchema],//one to many
 });
 
-const Product = mongoose.model('Product', productSchema)
-module.exports = Product;
+module.exports = mongoose.model('Product', productSchema);
 

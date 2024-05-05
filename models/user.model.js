@@ -21,5 +21,4 @@ const userSchema = new mongoose.Schema({
     feedBacks:[feedBackSchema],//one to many
 });
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);

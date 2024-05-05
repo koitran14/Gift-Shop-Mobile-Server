@@ -8,6 +8,5 @@ const paymentSchema = new mongoose.Schema({
     vouchers:[voucherSchema],//one to many
 });
 
-const Payment = mongoose.model('Payment', paymentSchema);
-module.exports = Payment;
+module.exports = mongoose.model('Payment', paymentSchema);
 

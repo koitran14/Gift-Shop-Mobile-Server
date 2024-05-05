@@ -13,5 +13,4 @@ var SpecialDaySchema = new mongoose.Schema({
     },
 });
 
-const SpecialDay = mongoose.model('SpecialDay', SpecialDaySchema);
-module.exports = SpecialDay;
+module.exports = mongoose.model('SpecialDay', SpecialDaySchema);
