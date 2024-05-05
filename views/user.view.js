@@ -6,9 +6,9 @@ module.exports = function(app) {
     app.get('/user', getAll);
 
     //LOGIN
-    app.post('/user/login', userLogin);
+    app.post('/api/login', userLogin);
 
     //REGISTER
-    app.post('/user/register', userRegister);
+    app.post('/api/register', userRegister);
     app.get('/user/user-exist', checkUserExist);
 }
