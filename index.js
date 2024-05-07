@@ -34,12 +34,8 @@ require('./views/category.view')(app);
 require('./views/select.view')(app);
 require('./views/include.view')(app);
 require('./views/following.view')(app);
-require('./views/productHas.view')(app);
-
 
 app.listen(port, () => {
     console.log(`Server is running at site: http://localhost:${port}`);
 });
-
-
 
