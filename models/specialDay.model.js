@@ -3,9 +3,13 @@ const propertyModel = require('./property.model').schema;
 
 var SpecialDaySchema = new mongoose.Schema({
     date: {
-        type: Date,
+        type: String,
         required: true,
         unique: true,
+    },
+    dateName: {
+        type: String,
+        required: true,
     },
     dateDescription: {
         type: String,

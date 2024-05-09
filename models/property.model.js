@@ -5,7 +5,7 @@ const mongoose = require('mongoose'); // Erase if already required
 // cũng không cần bỏ vào function main()
 
 const propertySchema = new mongoose.Schema({
-   typeOfProperties: {
+    typeOfProperties: {
         type: String,
         required: true,
         unique: true,

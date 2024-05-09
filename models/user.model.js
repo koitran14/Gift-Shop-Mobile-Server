@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const productModel = require('./product.model').schema;
 const orderModel = require('./order.model').schema;
 
 // NOTE: GỌI DIRECT NHƯ NÀY LUÔN. KHÔNG CẦN PHẢI THÊM BIẾN _id vì căn bản khi create Data nó đã auto tạo rồi.
@@ -17,7 +18,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    orders: [orderModel]
+    orders: [orderModel],
+    carts: [productModel]
 });
 
 module.exports = mongoose.model("User", userSchema);
