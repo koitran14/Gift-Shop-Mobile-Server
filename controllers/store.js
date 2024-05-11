@@ -1,5 +1,5 @@
 const Store = require('../models/store.model')
-
+const Category = require('../models/category.model')
 exports.getAll = async (req, res) => {
     try {
         const store = await Store.find();
@@ -19,10 +19,16 @@ exports.addStore = async (req, res) => {
 }
 
 exports.getProduct = async (req, res) => {
-    const storeName = req.params;
     try {
+        const storeData = req.query.storeName;
+        if (!storeData) {
+            return res.json({
+                message: "Unfilled data.",
+                status: false,
+            })
+        }
         //Kiểm tra xem có tồn tại storeName không
-        const store = await Store.findOne( storeName );
+        const store = await Store.findOne( {storeName: storeData} );
 
         if (!store) {
             return res.status(404).json({ error: "Store not found" });
@@ -35,11 +41,16 @@ exports.getProduct = async (req, res) => {
 }
 
 exports.getCategories = async (req, res) => {
-    const storeName = req.params;
     try {
+        const storeData = req.query.storeName;
+        if (!storeData) {
+            return res.json({
+                message: "Unfilled data.",
+                status: false,
+            })
+        }
         //Kiểm tra xem có tồn tại storeName không
-        const store = await Store.findOne( storeName );
-
+        const store = await Store.findOne( {storeName: storeData} );
         if (!store) {
             return res.status(404).json({ error: "Store not found" });
         }
@@ -58,7 +69,56 @@ exports.getCategories = async (req, res) => {
         });
 
         //Xuất các categories có trong store
-        return res.status(200).json(store.categories);
+        return res.status(200).json(categories);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+exports.getProductByCategory = async (req, res) => {
+    try {
+        const storeData = req.query.storeName;
+        const categoryData = req.query.categoryName;
+        if (!storeData || !categoryData) {
+            return res.json({
+                message: "Unfilled data.",
+                status: false,
+            })
+        }
+        //Kiểm tra xem có tồn tại storeName không
+        const store = await Store.findOne( {storeName: storeData} );
+        if (!store) {
+            return res.status(404).json({ error: "Store not found" });
+        }
+
+        // //Kiểm tra xem store có tồn tại category yêu cầu không
+        var categoryExists = false;
+        store.products.forEach(product => {
+            if (product.category.categoryName === categoryData) {
+                categoryExists = true;
+            }
+        });
+        
+        if (!categoryExists){
+            return res.status(404).json({ error: "Category not found in store products" });
+        }
+        //Mảng chứa các product thuộc requested category
+        let productsInCategory = [];
+
+        //Duỵêt từng product trong store
+        store.products.forEach(product => {
+            // Kiểm tra xem product thuộc category mong muốn không
+            if (product.category.categoryName === categoryData) {
+                productsInCategory.push(product);
+            }
+        });
+
+        // Kiểm tra xem có product trong danh mục không
+        if (productsInCategory.length === 0) {
+            return res.status(404).json({ error: "No products found in this category" });
+        }
+        //Xuất các product
+        return res.status(200).json(productsInCategory);
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
