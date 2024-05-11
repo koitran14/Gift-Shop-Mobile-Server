@@ -5,7 +5,7 @@
 ```shell
 DATABASE_URL='mongodb+srv://danhkhoimt1:khoitran1403@cluster0.ahwot8k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 DATABASE_NAME='giftDB'
-SERVER_PORT=8081
+SERVER_PORT=3000
 SERVER_IP='<IPv4 Address>'
 JWT_SECRET='giftDelivery'
 ```
