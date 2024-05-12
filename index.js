@@ -31,6 +31,8 @@ require('./views/payment.view')(app);
 require('./views/order.view')(app);
 require('./views/feedback.view')(app);
 require('./views/category.view')(app);
+require('./views/cart.view')(app);
+
 
 app.listen(port, () => {
     console.log(`Server is running at site: http://localhost:${port}`);
