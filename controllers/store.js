@@ -1,5 +1,6 @@
 const Store = require('../models/store.model')
 const Category = require('../models/category.model')
+
 exports.getAll = async (req, res) => {
     try {
         const store = await Store.find();
