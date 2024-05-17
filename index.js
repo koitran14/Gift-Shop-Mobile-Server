@@ -20,6 +20,11 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 app.use(bodyParser.json());
 
+//Import the cart routes
+const cartRoutes = require('./views/cart.view');
+//Use the Cart routes
+cartRoutes(app);
+
 //Tạo routes ở đây
 require('./views/specialDay.view')(app);
 require('./views/user.view')(app);
