@@ -1,8 +1,10 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { generateAccessToken, generateRefreshToken } = require('../middlewares/jwt')
 
 //import model that we use
 const User = require('../models/user.model');
+
 
 
 // **NOTE: các hàm khác có thể sử dụng bình thường, nhưng riêng insert/insertOne/insertMany thì nó sẽ được dùng cho collection,
@@ -69,7 +71,7 @@ exports.userRegister = async (req, res) => {
 exports.userLogin = async (req, res) => {
     try {
         const user = req.body;
-
+        // console.log(user);
         if (!user?.username || !user?.password) {
             return {
                 status: false,
@@ -86,11 +88,16 @@ exports.userLogin = async (req, res) => {
         if (savedUser) {
             let match = await bcrypt.compare(user?.password, savedUser?.password);
             if (match) {
-                let token = jwt.sign({ id: savedUser?._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                // let token = jwt.sign({ id: savedUser?._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                let token = generateAccessToken(savedUser?._id)
+                // Save and update  token to database 
+                await User.findByIdAndUpdate(savedUser._id, { token }, { new: true })
+                // Save cookie
+                res.cookie('token', token, { httpOnly: true, maxAge: 60 * 60 * 1000 })
                 return res.json({
                     status: true,
                     message: "User logged in successfully",
-                    data: token
+                    AccessToken: token,
                 })
             } else {
                 return res.json({
@@ -130,3 +137,50 @@ exports.checkUserExist = async (req, res) => {
         return res.status(500).json({ error: error.message })
     }
 }
+
+exports.getUserCurrent = async (req, res) => {
+    try {
+        const { id } = req.user
+        const response = await User.findById(id).select('-token -password -_id')
+        if (response) {
+            return res.status(200).json({
+                success: true,
+                user: response
+            })
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+}
+exports.deleteUser = async (req, res) => {
+    try {
+        const { _id } = req.body
+        console.log(req.body);
+        if (!_id) throw new Error("Not Found")
+        const response = await User.findByIdAndDelete(_id)
+        return res.status(200).json({
+            success: response ? true : false,
+            message: response ? `User with username ${respone.username} is deleted` : `Can not delete any account`
+        })
+    } catch (error) {
+        return res.status(500).json({ error: error.message })
+    }
+}
+exports.updateUser = async (req, res) => {
+    try {
+        const { id } = req.user
+        if (!id || Object.keys(req.body).length === 0) throw new Error('Not Found')
+        const response = await User.findByIdAndUpdate(id, req.user, { new: true }).select('-token -password -_id')
+        return res.status(200).json({
+            success: response ? true : false,
+            updatedUser: response ? response : "Not Found"
+        })
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+} 

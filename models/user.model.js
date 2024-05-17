@@ -7,18 +7,21 @@ const feedBackSchema = require('../models/feedback.model').schema;
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        require: true, //required from user's input
+        require: true, 
+        unique:true,//required from user's input
     },
     email: {
         type: String,
-        required: true,
     },
     password: {
         type: String,
         required: true,
     },
-    orders:[orderSchema],//one to many
-    feedBacks:[feedBackSchema],//one to many
+    token: {
+        type: String,
+    },
+    orders: [orderSchema],//one to many
+    feedBacks: [feedBackSchema],//one to many
 });
 
 module.exports = mongoose.model("User", userSchema);
