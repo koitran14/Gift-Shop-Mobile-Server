@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const app = express();
 const cors = require("cors");
-const port = process.env.PORT || 4000;
+const port = process.env.SERVER_PORT || 4000;
 
 app.use(cors());
 
@@ -36,15 +36,8 @@ require('./views/payment.view')(app);
 require('./views/order.view')(app);
 require('./views/feedback.view')(app);
 require('./views/category.view')(app);
-require('./views/select.view')(app);
-require('./views/include.view')(app);
-require('./views/following.view')(app);
-require('./views/productHas.view')(app);
-
 
 app.listen(port, () => {
     console.log(`Server is running at site: http://localhost:${port}`);
 });
-
-
 

@@ -6,8 +6,8 @@ var voucherSchema = new mongoose.Schema({
         required:true,
         unique:true,
     },
-    benifit:{
-        type:String,
+    discount:{
+        type: Number,
         required:true,
     },
     condition:{

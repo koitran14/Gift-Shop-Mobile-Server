@@ -1,4 +1,4 @@
-const Property = require('../models/product.model')
+const Property = require('../models/property.model')
 
 exports.getAll = async (req, res) => {
     try {

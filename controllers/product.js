@@ -11,19 +11,22 @@ exports.getAll = async (req, res) => {
 
 exports.addProduct = async (req, res) => {
     try {
-        const product = req.body;
-        if (!product.productName || !product.productDescription || !product.quantitySold) {
+        const productData = req.body;
+        if (!productData.productName || !productData.productDescription || !productData.productImage || !productData.price || !productData.category || !productData.properties) {
             return res.json({
-                message: "Product name, description, and quantity sold are required",
+                message: "Unfilled data.",
                 status: false,
             })
         }
 
-        let productObject = {
-            productName: product.productName,
-            productDescription: product.productDescription,
-            quantitySold: product.quantitySold
-        }
+        const productObject = {
+            productName: productData.productName,
+            productDescription: productData.productDescription,
+            productImage: productData.productImage,
+            price: productData.price,
+            properties: productData.properties,
+            category: productData.category,
+        };
 
         let savedProduct = await Product.create(productObject);
 
