@@ -1,9 +1,12 @@
 const mongoose = require('mongoose'); // Erase if already required
+const User = require('./user.model');
+const Product = require('./product.model');
+const Shop = require('./shop.model');
 
-// Declare the Schema of the Mongo model
 var favoriteSchema = new mongoose.Schema({
- 
+    user: User.schema,
+    product: [Product.schema],
+    shop: [Shop.schema]
 });
 
-//Export the model
 module.exports = mongoose.model('Favorite', favoriteSchema);

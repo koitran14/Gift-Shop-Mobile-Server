@@ -1,5 +1,14 @@
-const {getAll} = require('../controllers/favorite')
+const { getAll, getFavoriteForEachUser, createFavorite } = require('../controllers/favorite')
 
-module.exports = function(app) {
+module.exports = function (app) {
     app.get('/favorite', getAll);
+}
+module.exports = function (app) {
+    app.get('/favorite/user', getFavoriteForEachUser);
+}
+module.exports = function (app) {
+    app.post('/favorite/create', createFavorite);
+}
+module.exports = function (app) {
+    app.delete('/favorite/delete', deleteFavorite);
 }
