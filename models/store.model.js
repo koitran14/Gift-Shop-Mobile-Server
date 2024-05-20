@@ -12,12 +12,8 @@ var storeSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    products:{
-        type:[productSchema],
-    }, //one to many
-    followers: {
-        type:[User],
-    }
+    products: [productSchema],
+    followers: [User]
 });
 
 module.exports = mongoose.model('Store', storeSchema);

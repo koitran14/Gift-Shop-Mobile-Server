@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'); // Erase if already required
-const userSchema = require('./user.model'); 
+const userSchema = require('./user.model').schema; 
 
 const feedBackSchema = new mongoose.Schema({
     user: {

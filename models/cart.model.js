@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const productModel = require('./product.model').schema;
 
 // Define the cart schema
 const cartSchema = new mongoose.Schema({
@@ -6,18 +7,7 @@ const cartSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  product: {
-    type: String,
-    required: true,
-  },
-  category: {
-    type: String,
-    required: true,
-  },
-  feedback: {
-    type: String,
-  },
-  properties: [String],
+  product: productModel,
   quantity: {
     type: Number,
     required: true,
@@ -26,6 +16,4 @@ const cartSchema = new mongoose.Schema({
 });
 
 // Create the Cart model from the schema
-const Cart = mongoose.model('Cart', cartSchema);
-
-module.exports = Cart;
+module.exports = mongoose.model('Cart', cartSchema);
