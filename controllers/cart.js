@@ -15,8 +15,8 @@ exports.getAll = async (req, res) => {
 exports.addToCart = async (req, res) => {
   try {
     const cartItem = new Cart(req.body); // Create a new instance of the Cart model
-    await cartItem.save();
-    res.status(201).json({ message: 'Item added to cart successfully' });
+    const savedCartItem = await cartItem.save();
+    res.status(201).json(savedCartItem);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to add item to cart' });
@@ -26,8 +26,8 @@ exports.addToCart = async (req, res) => {
 // Remove an item from the cart
 exports.removeFromCart = async (req, res) => {
   try {
-    await Cart.findByIdAndDelete(req.body.id);
-    res.json({ message: 'Item removed from cart successfully' });
+    const removeCartItem = await Cart.findByIdAndDelete(req.body.id);
+    res.json(removeCartItem);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to remove item from cart' });
@@ -38,8 +38,8 @@ exports.removeFromCart = async (req, res) => {
 exports.updateCartItemQuantity = async (req, res) => {
   try {
     const { id, quantity } = req.body;
-    await Cart.findByIdAndUpdate(id, { quantity });
-    res.json({ message: 'Cart item quantity updated successfully' });
+    const updateCartItem = await Cart.findByIdAndUpdate(id, { quantity });
+    res.json(updateCartItem);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to update cart item quantity' });
