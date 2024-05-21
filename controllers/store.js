@@ -59,7 +59,7 @@ exports.getCategories = async (req, res) => {
         const categories = [];
         //duyệt từng product trong store
         store.products.forEach(product => {
-            const category = product.category;
+            const category = product.category.categoryName;
             // Nếu loại product chưa tồn tại trong categories, thêm vào và gán số lượng là 1
             if (!categories[category]) {
                 var object ={
