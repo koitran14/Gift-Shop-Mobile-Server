@@ -4,7 +4,10 @@ const Product = require('./product.model');
 const Store = require('./store.model');
 
 var favoriteSchema = new mongoose.Schema({
-    user: User.schema,
+    username: {
+        type: String,
+        required: true,
+    },
     product: [Product.schema],
     store: [Store.schema]
 });

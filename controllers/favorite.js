@@ -20,7 +20,11 @@ exports.createFavorite = async (req, res) => {
 
 exports.getFavoriteForEachUser = async (req, res) => {
     try {
-        const favorite = await Favorite.find({ user: req.params.user });
+        const user = req.query.user;
+        if (!user) {
+            return res.status(400).send("User not found")
+        }
+        const favorite = await Favorite.find({ user: user });
         return res.status(200).json(favorite);
     } catch (error) {
         return res.status(500).json({ error: error.message });
