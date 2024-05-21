@@ -1,15 +1,14 @@
 const mongoose = require('mongoose'); // Erase if already required
-const User = require('./user.model');
-const Product = require('./product.model');
-const Store = require('./store.model');
+const Product = require('./product.model').schema;
+const Store = require('./store.model').schema;
 
 var favoriteSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
     },
-    product: [Product.schema],
-    store: [Store.schema]
+    product: [Product],
+    store: [Store]
 });
 
 module.exports = mongoose.model('Favorite', favoriteSchema);

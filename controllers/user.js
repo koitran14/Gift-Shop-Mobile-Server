@@ -138,7 +138,7 @@ exports.checkUserExist = async (req, res) => {
 
 exports.getUserCurrent = async (req, res) => {
     try {
-        const { id } = req.user
+        const { id } = req.user;
         const response = await User.findById(id).select('-token -password -_id')
         if (response) {
             return res.status(200).json({

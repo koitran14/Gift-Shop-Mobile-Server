@@ -15,5 +15,4 @@ const cartSchema = new mongoose.Schema({
   },
 });
 
-// Create the Cart model from the schema
 module.exports = mongoose.model('Cart', cartSchema);

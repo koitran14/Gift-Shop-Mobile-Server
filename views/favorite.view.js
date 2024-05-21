@@ -9,6 +9,4 @@ module.exports = function (app) {
 module.exports = function (app) {
     app.post('/favorite/create', createFavorite);
 }
-module.exports = function (app) {
-    app.delete('/favorite/delete', deleteFavorite);
-}
+

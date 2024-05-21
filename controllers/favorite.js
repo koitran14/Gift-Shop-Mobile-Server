@@ -3,7 +3,10 @@ const Favorite = require('../models/favorite.model')
 exports.getAll = async (req, res) => {
     try {
         const favorite = await Favorite.find();
-        return res.status(200).json(favorite);
+        return res.status(200).json({
+            success: true,
+            data: favorite
+        });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -20,7 +23,7 @@ exports.createFavorite = async (req, res) => {
 
 exports.getFavoriteForEachUser = async (req, res) => {
     try {
-        const user = req.query.user;
+        const user = req.body.user;
         if (!user) {
             return res.status(400).send("User not found")
         }
@@ -33,7 +36,7 @@ exports.getFavoriteForEachUser = async (req, res) => {
 
 exports.deleteFavorite = async (req, res) => {
     try {
-        const favorite = await Favorite.findByIdAndDelete(req.params.id);
+        const favorite = await Favorite.findByIdAndDelete(req.body.id);
         if (!favorite) res.status(404).send("No item found")
         res.status(200).send();
     } catch (error) {
