@@ -56,16 +56,22 @@ exports.getCategories = async (req, res) => {
             return res.status(404).json({ error: "Store not found" });
         }
 
-        const categories = {};
+        const categories = [];
         //duyệt từng product trong store
         store.products.forEach(product => {
             const category = product.category;
             // Nếu loại product chưa tồn tại trong categories, thêm vào và gán số lượng là 1
             if (!categories[category]) {
-                categories[category] = 1;
+                var object ={
+                    categoryName: product.category.categoryName,
+                    quantity:1
+                }
+                categories.push(object);
+                //categories[category] = 1;
             } else {
                 // Nếu loại product đã tồn tại trong categories, tăng số lượng lên 1
-                categories[category]++;
+                //categories[category]++;
+                categories[category].quantity++;
             }
         });
 
