@@ -1,4 +1,4 @@
-const {getAll, addStore, getProduct, getCategories, getProductByCategory} = require('../controllers/store')
+const {getAll, addStore, getProduct, getCategories, getProductByCategory, getStoreByProductId, addProductByStoreId} = require('../controllers/store')
 
 module.exports = function(app) {
     //GET ALL STORE
@@ -11,4 +11,8 @@ module.exports = function(app) {
     app.get('/store/categories', getCategories);
     //SHOW ALL PRODUCTS IN STORE BY CATEGORY
     app.get('/store/categories/product', getProductByCategory);
+    
+    app.get('/store/:productId', getStoreByProductId)
+
+    app.post('/store/addProduct/:storeId', addProductByStoreId)
 }

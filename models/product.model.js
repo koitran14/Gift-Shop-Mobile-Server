@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     feedBacks: [feedBackSchema],//one to many
-    properties: [propertySchema]
+    properties: [propertySchema],
 });
 
 module.exports = mongoose.model('Product', productSchema);

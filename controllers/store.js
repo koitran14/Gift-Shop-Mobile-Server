@@ -123,3 +123,32 @@ exports.getProductByCategory = async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 }
+
+exports.getStoreByProductId = async(req, res) => {
+    try {
+        if (!req.params.productId){
+            return res.status(400).json({ error: 'Product Id not found.'})
+        }
+        const store = await Store.findOne({ 'products._id' : req.params.productId }).exec();
+        return res.status(200).json(store);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+exports.addProductByStoreId = async(req, res) => {
+    try {
+        const store = await Store.findById(req.params.storeId);
+        if (!store) 
+            return res.status(400).json({ error: 'Store not found.'})
+        const product = req.body.product;
+        store.products.push(product);
+        await store.save();
+        return res.status(200).json({
+            message: 'Successfully added into store.',
+            data: store
+        })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
