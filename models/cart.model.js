@@ -1,18 +1,15 @@
 const mongoose = require('mongoose');
 const productModel = require('./product.model').schema;
-
+const User = require('./user.model').schema
 // Define the cart schema
 const cartSchema = new mongoose.Schema({
-  user: {
-    type: String,
-    required: true,
-  },
-  product: productModel,
-  quantity: {
-    type: Number,
-    required: true,
-    min: 1, // Quantity must be at least 1
-  },
+    user: User,
+    product: productModel,
+    quantity: {
+      type: Number,
+      min: 1, // Quantity must be at least 1
+      default: 1,
+    },
 });
 
 // Create the Cart model from the schema

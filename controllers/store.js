@@ -1,5 +1,7 @@
 const Store = require('../models/store.model')
-const Category = require('../models/category.model')
+const User = require('../models/user.model')
+const Product = require('../models/product.model')
+
 exports.getAll = async (req, res) => {
     try {
         const store = await Store.find();
@@ -12,7 +14,10 @@ exports.getAll = async (req, res) => {
 exports.addStore = async (req, res) => {
     try {
         const store = await Store.create(req.body);
-        return res.status(200).json(store);
+        return res.status(200).json({
+            message: 'Successfully created.',
+            data: store
+        });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -141,9 +146,9 @@ exports.addProductByStoreId = async(req, res) => {
         const store = await Store.findById(req.params.storeId);
         if (!store) 
             return res.status(400).json({ error: 'Store not found.'})
-        const product = req.body.product;
-        store.products.push(product);
-        await store.save();
+        const product = new Product(req.body);
+        await store.products.push(product);
+        store.save();
         return res.status(200).json({
             message: 'Successfully added into store.',
             data: store
@@ -152,3 +157,44 @@ exports.addProductByStoreId = async(req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
+
+exports.addFollowerToStore = async(req, res) => {
+    try {
+        const store = await Store.findById(req.params.storeId);
+        if (!store) 
+            return res.status(400).json({ error: 'Store not found.'})
+        const user = new User(req.body);
+        await store.followers.push(user);
+        store.save();
+        return res.status(200).json({
+            message: 'Following.',
+            data: store
+        })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
+exports.removeFollowerFromStore = async (req, res) => {
+    try {
+        const store = await Store.findById(req.params.storeId);
+        const follower = req.body;
+        if (!store) 
+            return res.status(400).json({ error: 'Store not found.'});
+        
+        const index = store.followers.findIndex(follower => follower.equals(follower._id));
+        if (index === -1) 
+            return res.status(400).json({ error: 'User is not a follower of this store.' });
+
+        store.followers.splice(index, 1);
+
+        await store.save();
+
+        return res.status(200).json({
+            message: 'Unfollowed.',
+            data: store
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

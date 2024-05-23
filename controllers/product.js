@@ -1,3 +1,4 @@
+const feedbackModel = require('../models/feedback.model');
 const Product = require('../models/product.model');
 
 exports.getAll = async (req, res) => {
@@ -52,5 +53,23 @@ exports.addProduct = async (req, res) => {
             message: message,
             error: error.message
         })
+    }
+}
+
+exports.addFeedback = async(req, res) => {
+    try {
+        const product = await Product.findById(req.params.productId);
+        if (!product) 
+            return res.status(400).json({ error: 'Store not found.'})
+        
+        const feedback = new feedbackModel(req.body);
+        await product.feedBacks.push(feedback);
+        product.save();
+        return res.status(200).json({
+            message: 'Successfully sending feedbacks',
+            data: product
+        })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
     }
 }

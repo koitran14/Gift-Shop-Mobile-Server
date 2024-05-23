@@ -4,16 +4,11 @@ var voucherSchema = new mongoose.Schema({
     voucherTitle:{
         type:String,
         required:true,
-        unique:true,
     },
     discount:{
         type: Number,
         required:true,
-    },
-    condition:{
-        type:String,
-        required:true,
-    },
+    }
 });
 
 module.exports = mongoose.model('Voucher', voucherSchema);

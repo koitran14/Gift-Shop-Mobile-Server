@@ -5,12 +5,18 @@ const productSchema = require('../models/product.model').schema;
 var storeSchema = new mongoose.Schema({
     storeName:{
         type:String,
-        required:true,
-        unique:true,
+        required:true
     },
     storeDescription: {
         type:String,
         required:true,
+    },
+    storeAvatar: {
+        type: String,
+    },
+    storeLocation: {
+        type: String,
+        required: true,
     },
     products: [productSchema],
     followers: [User]

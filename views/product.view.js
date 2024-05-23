@@ -1,4 +1,4 @@
-const {getAll, addProduct} = require('../controllers/product')
+const {getAll, addProduct, addFeedback} = require('../controllers/product')
 
 module.exports = function(app) {
     //GET ALL PRODUCTS
@@ -6,4 +6,6 @@ module.exports = function(app) {
 
     //ADD NEW PRODUCT
     app.post('/product/add-product', addProduct);
+    app.post('/product/addFeedback/:productId', addFeedback);
+
 }

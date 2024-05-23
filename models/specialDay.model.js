@@ -5,7 +5,6 @@ var SpecialDaySchema = new mongoose.Schema({
     date: {
         type: String,
         required: true,
-        unique: true,
     },
     dateName: {
         type: String,
@@ -14,7 +13,10 @@ var SpecialDaySchema = new mongoose.Schema({
     dateDescription: {
         type: String,
         required: true,
-        unique: true,
+    },
+    dateThumbnail: {
+        type: String,
+        required: true,
     },
     properties: [propertyModel]
 });

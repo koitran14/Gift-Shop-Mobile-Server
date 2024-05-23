@@ -11,12 +11,12 @@ const orderSchema = new mongoose.Schema({
     },
     orderDate: {
         type: Date,
-        required: true,
+        default: Date.now, 
     },
     paymentMethod: {
         type: paymentSchema,
         required: true,
-    }, //one to one,
+    }, 
     voucher: voucherSchema,
     products: [productSchema]
 })

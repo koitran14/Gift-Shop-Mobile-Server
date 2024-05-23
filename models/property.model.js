@@ -7,8 +7,7 @@ const mongoose = require('mongoose'); // Erase if already required
 const propertySchema = new mongoose.Schema({
     typeOfProperties: {
         type: String,
-        required: true,
-        unique: true,
+        required: true
     },
 })
 

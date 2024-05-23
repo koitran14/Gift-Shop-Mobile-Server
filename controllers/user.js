@@ -96,6 +96,7 @@ exports.userLogin = async (req, res) => {
                     status: true,
                     message: "User logged in successfully",
                     AccessToken: token,
+                    user: savedUser
                 })
             } else {
                 return res.json({
