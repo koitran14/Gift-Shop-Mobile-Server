@@ -141,6 +141,17 @@ exports.getStoreByProductId = async(req, res) => {
     }
 }
 
+exports.getFollowingByUserId = async (req, res) => {
+    try {
+        const { userId } = req.params;
+    
+        const stores = await Store.find({ 'followers._id': userId });
+        return res.status(200).json(stores);
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+};
+
 exports.addProductByStoreId = async(req, res) => {
     try {
         const store = await Store.findById(req.params.storeId);

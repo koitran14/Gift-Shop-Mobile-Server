@@ -20,6 +20,6 @@ module.exports = function (app) {
     app.delete('/api', verifyAccessToken, deleteUser)
 
     //UPDATE
-    app.patch('/api/update-user', verifyAccessToken, updateUser)
+    app.put('/api/update-user', updateUser)
 
 }
